@@ -3,6 +3,7 @@ import "semantic-ui-css/semantic.min.css";
 import Container from "./components/Container";
 import Header from "./components/Header";
 import InputTask from "./components/InputTask";
+import TaskContent from "./components/TaskContent";
 
 function App() {
   //PASAR LAS TAREAS A LOCALSTORGE
@@ -28,10 +29,19 @@ function App() {
   };
 
 
+  const deleteTask = (id) => {
+    const currentTask = tasks.filter((task)=> task.idTask !== id) //filtrar todas las tareas menos la que se selecciono
+
+    setTasks(currentTask) // reescribir las tereas
+  }
+
+
   return (
     <Container>
       <Header />
-      <InputTask createTask={crearTask} />
+      <InputTask 
+      createTask={crearTask} />
+      <TaskContent tasks={tasks} deleteTask={deleteTask}/>
     </Container>
   );
 }
